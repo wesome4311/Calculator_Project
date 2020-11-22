@@ -3,16 +3,17 @@ package Calculator_Final;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 
-import java.lang.Math;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  *This code controls what happens when the buttons are pressed
  */
-public class calculatorController{
+public class calculatorController implements KeyListener {
+
+
 
     //Float data = 0f;
     Double Value1 = null;
@@ -23,8 +24,10 @@ public class calculatorController{
 
     @FXML
     private TextField display;
-    @FXML
-    private Label label;
+    //@FXML
+    //private Slider slidervalue;
+    //<Slider fx:id="slidervalue" prefHeight="98.0" prefWidth="434.0"/> //this should be on the fxml page
+    //JSlider slider = new JSlider(JSlider.VERTICAL, 0, 100, 0);
 
     @FXML
     private Button button0;
@@ -272,7 +275,10 @@ public class calculatorController{
         } //done
 
         else if (event.getSource() == buttonAdd) {
-            if (Value2 == null){
+            if (Value1 == null) {
+                Value1 = 0.0;
+            }
+            else if (Value2 == null){
                 if (Negative){
                     Value1 = Value1 * -1;
                     Negative = false;
@@ -289,6 +295,9 @@ public class calculatorController{
                 Negative = true;
                 display.setText("-");
             }
+            else if (Value1 == null && Negative) {
+                Value1 = 0.0;
+            }
             else if (Value2 == null && Operand == null){
                 if (Negative){
                     Value1 = Value1 * -1;
@@ -304,9 +313,12 @@ public class calculatorController{
             else if (Operand != null) {
                 equals();
             }
-        }
+        } //negative stuff has been accounted for
         else if (event.getSource() == buttonMult) {
-            if (Value2 == null){
+            if (Value1 == null) {
+                Value1 = 0.0;
+            }
+            else if (Value2 == null){
                 if (Negative){
                     Value1 = Value1 * -1;
                     Negative = false;
@@ -319,7 +331,10 @@ public class calculatorController{
             }
         }
         else if (event.getSource() == buttonDiv) {
-            if (Value2 == null){
+            if (Value1 == null) {
+                Value1 = 0.0;
+            }
+            else if (Value2 == null){
                 if (Negative){
                     Value1 = Value1 * -1;
                     Negative = false;
@@ -415,7 +430,187 @@ public class calculatorController{
     }
 
     boolean nullcheck() {
-        return (Value1 != null) || (Value2 != null) || (Operand != null);
-    } //returns true if nothing is null, false if anyone of them is
+        return !(Value1 == null) || (Value2 == null) || (Operand == null);
+    } //returns true if nothing is null, false if anyone of them is - seems to not be working
 
+
+
+    //doesn't work, but its got all the stuff for working, so whatever
+    @Override
+    public void keyTyped(KeyEvent e) {
+        switch (String.valueOf(e)) {
+            case "0":
+                if (Operand == null) {
+                    if (Value1 == null) {
+                        Value1 = 0.0;
+                    } else {
+                        Value1 = (Value1 * 10);
+                    }
+                } else {
+                    if (Value2 == null) {
+                        Value2 = 0.0;
+                    } else {
+                        Value2 = (Value2 * 10);
+                    }
+                }
+                display.setText(display.getText() + "0");
+                break;
+            case "1":
+                if (Operand == null) {
+                    if (Value1 == null) {
+                        Value1 = 1.0;
+                    } else {
+                        Value1 = (Value1 * 10) + 1;
+                    }
+                } else {
+                    if (Value2 == null) {
+                        Value2 = 1.0;
+                    } else {
+                        Value2 = (Value2 * 10) + 1;
+                    }
+                }
+                display.setText(display.getText() + "1");
+                break;
+            case "2":
+                if (Operand == null) {
+                    if (Value1 == null) {
+                        Value1 = 2.0;
+                    } else {
+                        Value1 = (Value1 * 10) + 2;
+                    }
+                } else {
+                    if (Value2 == null) {
+                        Value2 = 2.0;
+                    } else {
+                        Value2 = (Value2 * 10) + 2;
+                    }
+                }
+                display.setText(display.getText() + "2");
+                break;
+            case "3":
+                if (Operand == null) {
+                    if (Value1 == null) {
+                        Value1 = 3.0;
+                    } else {
+                        Value1 = (Value1 * 10) + 3;
+                    }
+                } else {
+                    if (Value2 == null) {
+                        Value2 = 3.0;
+                    } else {
+                        Value2 = (Value2 * 10) + 3;
+                    }
+                }
+                display.setText(display.getText() + "3");
+                break;
+            case "4":
+                if (Operand == null) {
+                    if (Value1 == null) {
+                        Value1 = 4.0;
+                    } else {
+                        Value1 = (Value1 * 10) + 4;
+                    }
+                } else {
+                    if (Value2 == null) {
+                        Value2 = 4.0;
+                    } else {
+                        Value2 = (Value2 * 10) + 4;
+                    }
+                }
+                display.setText(display.getText() + "4");
+                break;
+            case "5":
+                if (Operand == null) {
+                    if (Value1 == null) {
+                        Value1 = 5.0;
+                    } else {
+                        Value1 = (Value1 * 10) + 5;
+                    }
+                } else {
+                    if (Value2 == null) {
+                        Value2 = 5.0;
+                    } else {
+                        Value2 = (Value2 * 10) + 5;
+                    }
+                }
+                display.setText(display.getText() + "5");
+                break;
+            case "6":
+                if (Operand == null) {
+                    if (Value1 == null) {
+                        Value1 = 6.0;
+                    } else {
+                        Value1 = (Value1 * 10) + 6;
+                    }
+                } else {
+                    if (Value2 == null) {
+                        Value2 = 6.0;
+                    } else {
+                        Value2 = (Value2 * 10) + 6;
+                    }
+                }
+                display.setText(display.getText() + "6");
+                break;
+            case "7":
+                if (Operand == null) {
+                    if (Value1 == null) {
+                        Value1 = 7.0;
+                    } else {
+                        Value1 = (Value1 * 10) + 7;
+                    }
+                } else {
+                    if (Value2 == null) {
+                        Value2 = 7.0;
+                    } else {
+                        Value2 = (Value2 * 10) + 7;
+                    }
+                }
+                display.setText(display.getText() + "7");
+                break;
+            case "8":
+                if (Operand == null) {
+                    if (Value1 == null) {
+                        Value1 = 8.0;
+                    } else {
+                        Value1 = (Value1 * 10) + 8;
+                    }
+                } else {
+                    if (Value2 == null) {
+                        Value2 = 8.0;
+                    } else {
+                        Value2 = (Value2 * 10) + 8;
+                    }
+                }
+                display.setText(display.getText() + "8");
+                break;
+            case "9":
+                if (Operand == null) {
+                    if (Value1 == null) {
+                        Value1 = 9.0;
+                    } else {
+                        Value1 = (Value1 * 10) + 9;
+                    }
+                } else {
+                    if (Value2 == null) {
+                        Value2 = 9.0;
+                    } else {
+                        Value2 = (Value2 * 10) + 9;
+                    }
+                }
+                display.setText(display.getText() + "9");
+                break;
+
+        }
+
+    }
+
+    //don't actually need these two
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
 }
