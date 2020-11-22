@@ -56,8 +56,8 @@ public class calculatorController{
 
     @FXML
     private Button buttonDec;
-    @FXML
-    private Button buttonNeg;
+    //@FXML
+    //private Button buttonNeg;
 
 
 
@@ -72,60 +72,83 @@ public class calculatorController{
     void handleButtonAction(ActionEvent event) {
         if (event.getSource() == button1) {
             display.setText(display.getText() + "1");
-        } else if (event.getSource() == button2) {
+        }
+        else if (event.getSource() == button2) {
             display.setText(display.getText() + "2");
-        } else if (event.getSource() == button3) {
+        }
+        else if (event.getSource() == button3) {
             display.setText(display.getText() + "3");
-        } else if (event.getSource() == button4) {
+        }
+        else if (event.getSource() == button4) {
             display.setText(display.getText() + "4");
-        } else if (event.getSource() == button5) {
+        }
+        else if (event.getSource() == button5) {
             display.setText(display.getText() + "5");
-        } else if (event.getSource() == button6) {
+        }
+        else if (event.getSource() == button6) {
             display.setText(display.getText() + "6");
-        } else if (event.getSource() == button7) {
+        }
+        else if (event.getSource() == button7) {
             display.setText(display.getText() + "7");
-        } else if (event.getSource() == button8) {
+        }
+        else if (event.getSource() == button8) {
             display.setText(display.getText() + "8");
-        } else if (event.getSource() == button9) {
+        }
+        else if (event.getSource() == button9) {
             display.setText(display.getText() + "9");
-        } else if (event.getSource() == button0) {
+        }
+        else if (event.getSource() == button0) {
             display.setText(display.getText() + "0");
-        } else if (event.getSource() == buttonClear) {
+        }
+
+
+        else if (event.getSource() == buttonClear) {
             display.setText("");
-        } else if (event.getSource() == buttonAdd) {
-            data = Float.parseFloat(display.getText());
+        }
+        else if (event.getSource() == buttonAdd) {
+            //data = Float.parseFloat(display.getText());
             operation = 1; //Addition
-            display.setText("");
-        } else if (event.getSource() == buttonSub) {
-            data = Float.parseFloat(display.getText());
+            display.setText(display.getText() + "+");
+        }
+        else if (event.getSource() == buttonSub) {
+            //data = Float.parseFloat(display.getText());
             operation = 2; //Substraction
-            display.setText("");
-        } else if (event.getSource() == buttonMult) {
-            data = Float.parseFloat(display.getText());
+            display.setText(display.getText() + "-");
+        }
+        else if (event.getSource() == buttonMult) {
+            //data = Float.parseFloat(display.getText());
             operation = 3; //Mul
-            display.setText("");
-        } else if (event.getSource() == buttonDiv) {
-            data = Float.parseFloat(display.getText());
+            display.setText(display.getText() + "*");
+        }
+        else if (event.getSource() == buttonDiv) {
+            //data = Float.parseFloat(display.getText());
             operation = 4; //Division
-            display.setText("");
-        } else if (event.getSource() == buttonSquare) {
+            display.setText(display.getText() + "/");
+        }
+        else if (event.getSource() == buttonSquare) {
             data = Float.parseFloat(display.getText());
             Float ans = data * data;
             display.setText(String.valueOf(ans));
-        } else if (event.getSource() == buttonRoot) {
+        }
+        else if (event.getSource() == buttonRoot) {
             data = Float.parseFloat(display.getText());
             double ans = Math.sqrt(data);
             display.setText(String.valueOf(ans));
-        } else if (event.getSource() == buttonDec) {
+        }
+        else if (event.getSource() == buttonDec) {
             display.setText(display.getText() + ".");
-        } else if (event.getSource() == buttonCE) {
+        }
+        else if (event.getSource() == buttonCE) {
             String str = display.getText();
             display.setText(str.substring(0,str.length()-2));
-        } else if (event.getSource() == buttonEqu) {
+        }
+
+
+        else if (event.getSource() == buttonEqu) {
             Float secondOperand = Float.parseFloat(display.getText());
             switch (operation) {
                 case 1: //Addition
-                    Float ans = data + secondOperand;
+                    float ans = data + secondOperand;
                     display.setText(String.valueOf(ans));break;
                 case 2: //Subtraction
                     ans = data - secondOperand;
