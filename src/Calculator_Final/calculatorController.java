@@ -266,44 +266,86 @@ public class calculatorController{
             display.setText(display.getText() + "0");
         } //number buttons have all been updated so that they update the values independent of the display
 
-
         else if (event.getSource() == buttonClear) {
             display.setText("");
             reset();
-        }
+        } //done
+
         else if (event.getSource() == buttonAdd) {
-            //data = Float.parseFloat(display.getText());
-            Operand = "+"; //Addition
-            display.setText(display.getText() + "+");
+            if (Value2 == null){
+                if (Negative){
+                    Value1 = Value1 * -1;
+                    Negative = false;
+                }
+                Operand = "+"; //Addition
+                display.setText(display.getText() + "+");
+            }
+            else if (Operand != null) {
+                equals();
+            }
         }
         else if (event.getSource() == buttonSub) {
-            //data = Float.parseFloat(display.getText());
-            Operand = "-"; //Subtraction
-            display.setText(display.getText() + "-");
+            if (Value1 == null) {
+                Negative = true;
+                display.setText("-");
+            }
+            else if (Value2 == null && Operand == null){
+                if (Negative){
+                    Value1 = Value1 * -1;
+                    Negative = false;
+                }
+                Operand = "-"; //Subtraction
+                display.setText(display.getText() + "-");
+            }
+            else if (Value2 == null && Operand != null){
+                Negative = true;
+                display.setText(display.getText() + "-");
+            }
+            else if (Operand != null) {
+                equals();
+            }
         }
         else if (event.getSource() == buttonMult) {
-            //data = Float.parseFloat(display.getText());
-            Operand = "*"; //Mul
-            display.setText(display.getText() + "*");
+            if (Value2 == null){
+                if (Negative){
+                    Value1 = Value1 * -1;
+                    Negative = false;
+                }
+                Operand = "*"; //Multiplication
+                display.setText(display.getText() + "*");
+            }
+            else if (Operand != null) {
+                equals();
+            }
         }
         else if (event.getSource() == buttonDiv) {
-            //data = Float.parseFloat(display.getText());
-            Operand = "/"; //Division
-            display.setText(display.getText() + "/");
-        }
-        else if (event.getSource() == buttonSquare) {
-            //data = Float.parseFloat(display.getText());
+            if (Value2 == null){
+                if (Negative){
+                    Value1 = Value1 * -1;
+                    Negative = false;
+                }
+                Operand = "/"; //Division
+                display.setText(display.getText() + "/");
+            }
+            else if (Operand != null) {
+                equals();
+            }
+        } //base math has been adjusted to allow for pseudo multinary math
+
+        else if (event.getSource() == buttonSquare) { //TODO
             double ans = Value1 * Value1;
             display.setText(String.valueOf(ans));
         }
 
         else if (event.getSource() == buttonRoot) { //TODO
-            //data = Float.parseFloat(display.getText());
             double ans = Math.sqrt(Value1);
             display.setText(String.valueOf(ans));
         }
 
         else if (event.getSource() == buttonDec) { //TODO
+            Value1 = 5.0;
+            Value2 = 5.0;
+            Operand = "+";
             display.setText(display.getText() + ".");
         }
 
@@ -318,47 +360,53 @@ public class calculatorController{
             }
             else {
                 Value2 = null;
-                display.setText(String.valueOf(Value1) + Operand);
+                display.setText(Value1 + Operand);
             }
-        } //probably done
+        } //most likely probably fine
 
 
         else if (event.getSource() == buttonEqu) {
-            //Float secondOperand = Float.parseFloat(display.getText());
             equals();
-        }
+        } //moved to equals function
     }
 
     // a function that mimics your original equals function
-    double equals() {
+    void equals() {
         double ans = 0.0;
-        switch (Operand) {
-            case "+": //Addition
-                ans = Value1 + Value2;
-                display.setText(String.valueOf(ans));
-                break;
-            case "-": //Subtraction
-                ans = Value1 - Value2;
-                display.setText(String.valueOf(ans));
-                break;
-            case "*": //Mul
-                ans = Value1 * Value2;
-                display.setText(String.valueOf(ans));
-                break;
-            case "/": //Div
-                if (Value2 == 0) {
-                    display.setText("Cannot Divide By Zero"); //does a weird thing here where it only shows the first 3 letters, if you click it though and use an arrow key, you can see the whole message
-                }
-                else {
-                    ans = Value1 / Value2;
+        if (nullcheck()) {
+            if (Negative){
+                Value2 = Value2 * -1;
+                Negative = false;
+            }
+            switch (Operand) {
+                case "+": //Addition
+                    ans = Value1 + Value2;
                     display.setText(String.valueOf(ans));
-                }
-                break;
+                    break;
+                case "-": //Subtraction
+                    ans = Value1 - Value2;
+                    display.setText(String.valueOf(ans));
+                    break;
+                case "*": //Mul
+                    ans = Value1 * Value2;
+                    display.setText(String.valueOf(ans));
+                    break;
+                case "/": //Div
+                    if (Value2 == 0) {
+                        display.setText("Cannot Divide By Zero"); //does a weird thing here where it only shows an amount of letters equal to how many digits were already out, if you click it though and use an arrow key, you can see the whole message
+                    } else {
+                        ans = Value1 / Value2;
+                        display.setText(String.valueOf(ans));
+                    }
+                    break;
+            }
+            reset();
+            Value1 = ans;
         }
-        return ans;
+        //return ans;
     }
 
-    //handy function for returning everything to its beggining
+    //handy function for returning everything to its beginning
     void reset() {
         Value1 = null;
         Value2 = null;
@@ -366,8 +414,8 @@ public class calculatorController{
         Negative = false;
     }
 
-    void stillnull() {
-        //check if anything is still null - value 1 and 2, operand
-    }
+    boolean nullcheck() {
+        return (Value1 != null) || (Value2 != null) || (Operand != null);
+    } //returns true if nothing is null, false if anyone of them is
 
 }

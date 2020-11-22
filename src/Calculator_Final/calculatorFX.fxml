@@ -98,7 +98,7 @@
                         <Font size="30.0" />
                     </font>
                 </Button>
-                <Button fx:id="buttonClear" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="500.0" prefWidth="500.0" text="CL" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                <Button fx:id="buttonClear" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="500.0" prefWidth="500.0" text="C" GridPane.columnIndex="4" GridPane.rowIndex="3">
                     <font>
                         <Font size="30.0" />
                     </font>
@@ -146,7 +146,7 @@
                </center></BorderPane>
             </children>
         </GridPane>
-        <TextField fx:id="display" alignment="CENTER_RIGHT" editable="false" prefHeight="98.0" prefWidth="434.0" stylesheets="@calculatorCSS.css">
+        <TextField fx:id="display" alignment="CENTER_LEFT" editable="false" prefHeight="98.0" prefWidth="434.0" stylesheets="@calculatorCSS.css">
             <font>
                 <Font size="41.0" />
             </font>
